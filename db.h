@@ -27,18 +27,17 @@ class Database{
     //"instance" (pointer to Database) is a staic variable that stores the instance of the database. Its value is set in the function "getInstance"
     //ToDo
         static Database* instance;
-    //constructor that helps creating instance of db(e.g. sales.db) accepts name of the database, username, password. 
-    //ToDo
-        Database(std::string input_db, std::string input_username, std::string input_password);
-    //destructor that disconnects the connection if connected.
-    //ToDo
-        ~Database();
 
-        
     time_t last_activity;
     static const int TIMEOUT{5};
 
     public:
+        //constructor that helps creating instance of db(e.g. sales.db) accepts name of the database, username, password. 
+        //ToDo
+        Database(std::string input_db, std::string input_username, std::string input_password);
+    //destructor that disconnects the connection if connected.
+    //ToDo
+        ~Database();
     //"getInstance" that creates and returns the instance of the database. If called first time it sets the username and password. 
     //However, subsequent time, it matches the database name, username and password and returns the previous instance if matched else it 
     //throws std::runtime_error("invalid database name, username or password"). We are using Singleton Design Pattern that creates only one 
