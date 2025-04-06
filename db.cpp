@@ -85,7 +85,7 @@ void* Database::operator new(size_t size)
 {
 
     //Creates new database with malloc
-    std::cout << "overloaded new";
+    std::cout << "overloaded new ";
     void * new_database = malloc(size);
 
     //Check if unable to allocate
@@ -102,7 +102,7 @@ void Database::operator delete(void* new_database)
     //Refreshes connection
     instance->refreshConnection();
 
-    std::cout << "overloaded delete";
+    std::cout << "overloaded delete ";
 
     free(new_database);
 }
