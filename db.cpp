@@ -6,31 +6,34 @@ Database* Database::instance = nullptr;
 
 Database::Database(std::string input_db, std::string input_username, std::string input_password)
 {
-    //Refreshes connection
-    instance->refreshConnection();
 
     //Initializes all variables
     db = input_db;
     username = input_username;
     password = input_password;
     connected = true;
+
+
 }
 
 Database::~Database()
 {
     connected = false;
+    //Refreshes connection
+    instance->refreshConnection();
 }
 
 Database* Database::getInstance(const std::string input_database, const std::string input_username, const std::string input_password)
 {
-    //Refreshes connection
-    instance->refreshConnection();
-
+    
     //Check if instance doesn't exist, if so, create instance
     if (instance == nullptr)
     {
         //Creates space for instance
         instance = new Database(input_database, input_username, input_password);
+
+        //Refreshes connection
+        instance->refreshConnection();
 
         return instance;
     }
@@ -39,6 +42,9 @@ Database* Database::getInstance(const std::string input_database, const std::str
         //Check if inputs match the existing instance
         if (input_database == instance->get_db() && input_username == instance->get_username() && input_password == instance->get_password())
         {
+            //Refreshes connection
+            instance->refreshConnection();
+
             return instance;
         }
         else
@@ -77,8 +83,6 @@ bool Database::isConnected()
 
 void* Database::operator new(size_t size)
 {
-    //Refreshes connection
-    instance->refreshConnection();
 
     //Creates new database with malloc
     std::cout << " overloaded new " << std::endl;
